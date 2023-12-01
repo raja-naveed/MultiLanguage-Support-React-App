@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
@@ -11,13 +11,20 @@ const languages = [
 
 const Header = () => {
   const { t, i18n } = useTranslation();
-  const [lang, setLang] = useState('en');
+  const storedLang = localStorage.getItem('selectedLanguage') || 'en'; // Retrieve language from localStorage or default to English
+  const [lang, setLang] = useState(storedLang);
 
   const handleChange = (e) => {
     const selectedLang = e.target.value;
     setLang(selectedLang);
     i18n.changeLanguage(selectedLang);
+    localStorage.setItem('selectedLanguage', selectedLang); // Store selected language in localStorage
   };
+
+  useEffect(() => {
+    // Change language when component mounts based on localStorage value
+    i18n.changeLanguage(lang);
+  }, [lang, i18n]);
 
   return (
     <header className="flex justify-between items-center px-4 py-3 bg-gray-800 text-white">
