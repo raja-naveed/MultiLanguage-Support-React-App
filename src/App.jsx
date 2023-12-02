@@ -1,17 +1,26 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SpotifyClone from "./Spotify";
-import Home from "./Home";
-import About from "./About";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Article from "./pages/Article";
+import Customer from "./pages/Customer";
+import Download from "./pages/Download";
+import Hero from "./pages/Hero";
+import Landing from "./pages/Landing";
+import Services from "./pages/Services";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/search" element={<SpotifyClone />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Header />
+      <div className="relative mx-auto container">
+        <Hero />
+        <Services />
+        <Landing />
+        <Download />
+        <Customer />
+        <Article />
+      </div>
+      <Footer />
+    </>
   );
 };
 export default App;
